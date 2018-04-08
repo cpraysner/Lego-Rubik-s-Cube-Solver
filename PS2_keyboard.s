@@ -59,7 +59,6 @@ beq et, r20, orange
 movi r20, 0x2D # red, r
 beq et, r20, red
 
-
 # check keyboard break code
 movi r20, 0xF0
 bne et, r20, poll
