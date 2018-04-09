@@ -48,12 +48,9 @@ void solved_screen();
 int main () {
 	bool solved = false;
 	clear_screen();
-
-	while (true) {
-		print_background();
-	}
-
-	solved = false;
+	configuration_prompt();
+	back(); // is this how you add the function?
+	solved_screen();
 	free(outputConfiguration);
 	outputConfiguration = NULL;
 	return 0;
@@ -121,7 +118,7 @@ void configuration_prompt() {
 		BLUE = B\tYELLOW = Y\n
 		WHITE = W\tORANGE = 0\n";
 		for (int i = 0; i < strlen(prompt); i++) {
-			write_char(40 + i, 40, prompt[i]);
+			write_char(40 + i, 20, prompt[i]);
 		}
 	blue = false;
 	red = false;
@@ -144,7 +141,7 @@ void colour_input_prompt() {
 		BLUE = B\tYELLOW = Y\n
 		WHITE = W\tORANGE = 0\n";
 		for (int i = 0; i < strlen(prompt); i++) {
-			write_char(40 + i, 40, prompt[i]);
+			write_char(40 + i, 20, prompt[i]);
 		}
 	blue = false;
 	red = false;
@@ -424,6 +421,7 @@ char * configuration_converter() {
 			orange = false;
 		}
 		firstColour = ture;
+		colour_input_prompt();
 	}
 
 	// this is where the user types in the colour on each side
@@ -431,7 +429,7 @@ char * configuration_converter() {
 	// remember to dealloc the string later in main (outputConfiguration), method see below
 	// https://stackoverflow.com/questions/10279718/append-char-to-string-in-c
 
-	for (int i = 0; i < 60; i++) {
+	if((colourInputCounter>6)&&(colourInputCounter<=60)) {
 		firstColour = false;
 		if (orange) {
 			write_char(40 + i, 40, 'O');
@@ -463,6 +461,9 @@ char * configuration_converter() {
 			outputConfiguration = append(outputConfiguration, redCenterSide);
 			red = false;
 		}
+	}
+	if (colourInputCounter == 60) {
+		return outputConfiguration;
 	}
 
 }

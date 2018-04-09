@@ -134,10 +134,10 @@ exit_handler:
 
 
 .section .text
-.global _start
-_start:
+#.global _start
+#_start:
 
-br back
+#br back
 
 parsing:
 	
